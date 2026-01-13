@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Security Subsystem</title>
+    <link rel="stylesheet" href="signupstyle.css"> </head>
+<body>
+
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo">
+                <div class="icon"></div>
+                <h2>Create Account</h2>
+                <p>Register a new Analyst Profile</p>
+            </div>
+
+            <form id="signupForm">
+                <div class="input-group">
+                    <label for="new-username">Admin Username</label>
+                    <input type="text" id="new-username" placeholder="e.g. Analyst_01" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="new-password">System Password</label>
+                    <input type="password" id="new-password" placeholder="••••••••" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="auth-code">Authorization Key</label>
+                    <input type="text" id="auth-code" placeholder="LMUI-XXXX-2026" required>
+                </div>
+
+                <button type="submit" class="login-btn">Initialize Profile</button>
+            </form>
+            
+            <div class="footer-note">
+                <p>Already have an account? <a href="login.html" style="color: #38bdf8; text-decoration: none;">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Profile request sent to System Admin for approval.");
+            window.location.href = "login.html";
+        });
+    </script>
+
+</body>
+</html>

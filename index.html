@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CyberThreat LogDetector • Real-time Threat Detection</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">Log<span>Detector</span></div>
+      <div class="nav-links">
+        <a href="#analyze">Analyze</a>
+        <a href="#">Docs</a>
+        <a href="#">Pricing</a>
+      </div>
+      <div>
+        <a href="#" class="btn btn-outline">Login</a>
+        <a href="#analyze" class="btn btn-primary">Get Started</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Detect. Analyze. Protect.</h1>
+    <p>Real-time cyber threat detection from your logs</p>
+    <a href="#analyze" class="btn btn-outline">Check Vulnerability</a>
+  </div>
+</section>
+
+<section class="log-analyzer" id="analyze">
+  <div class="container">
+    <h2 class="section-title">Analyze Your Logs</h2>
+
+    <textarea id="logInput" placeholder="Paste your server or authentication logs here..."></textarea>
+
+    <button class="btn btn-primary" onclick="analyzeLogs()">Analyze Logs</button>
+
+    <div id="resultBox" class="result-box"></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025–2026 CyberThreat LogDetector • Open-source ready</p>
+</footer>
+
+<script>
+function analyzeLogs() {
+  const logs = document.getElementById("logInput").value.toLowerCase();
+  const resultBox = document.getElementById("resultBox");
+
+  if (!logs.trim()) {
+    resultBox.style.display = "block";
+    resultBox.className = "result-box threat";
+    resultBox.innerHTML = " No logs provided.";
+    return;
+  }
+
+  let threats = [];
+
+  if (logs.includes("failed password")) {
+    threats.push("Brute-force login attempts detected");
+  }
+
+  if (logs.includes("invalid user")) {
+    threats.push("Credential stuffing behavior detected");
+  }
+
+  if (logs.includes("sql") || logs.includes("select * from")) {
+    threats.push("Possible SQL injection attempt");
+  }
+
+  if (logs.includes("unauthorized") || logs.includes("403")) {
+    threats.push("Unauthorized access attempts");
+  }
+
+  resultBox.style.display = "block";
+
+  if (threats.length > 0) {
+    resultBox.className = "result-box threat";
+    resultBox.innerHTML = `
+      <strong> Threats Detected:</strong>
+      <ul>
+        ${threats.map(t => `<li>${t}</li>`).join("")}
+      </ul>
+    `;
+  } else {
+    resultBox.className = "result-box safe";
+    resultBox.innerHTML = " No threats detected. Logs look clean.";
+  }
+}
+</script>
+
+</body>
+</html>
