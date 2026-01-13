@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flagged Suspicious IPs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #020617;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #334155;
+        }
+        th {
+            background: #1e293b;
+        }
+        tr:hover {
+            background: #1e293b;
+        }
+    </style>
+</head>
+<body>
+
+<h2>🚨 Suspicious IP Detection Results</h2>
+
+<table id="ipTable">
+    <thead>
+        <tr>
+            <th>IP Address</th>
+            <th>Attempts</th>
+            <th>Timestamp</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+fetch("../output/flagged_IPs.json")
+    .then(res => res.json())
+    .then(data => {
+        const tbody = document.querySelector("#ipTable tbody");
+        data.forEach(item => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${item.ip}</td>
+                <td>${item.attempts}</td>
+                <td>${item.timestamp}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    });
+</script>
+
+</body>
+</html>
